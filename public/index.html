@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="geral.css">
+    <title> 🤽‍♀️ TESTE DE NATAÇÃO</title>
+</head>
+<body>
+   <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color:rgb(153, 192, 211);
+        text-align: center;
+    }
+    
+    h1 {
+        color: rgb(24, 88, 117);
+        margin-bottom: 10px;
+    }
+    
+    p{
+        font-size: 1.3rem;
+        color: rgb(24, 88, 117);
+    }
+    
+    label{
+        font-size: 1.2rem;
+        color: rgb(24, 88, 117);
+    }
+    
+    
+    @keyframes blink {
+        50% {
+            opacity: 65%;
+        }
+    }
+       
+    .container{
+        background-color: rgba(240, 248, 255, 0.233);
+        padding: 55px;
+        border-radius: 5%;
+        box-shadow: 0 8px 16px #2e7a8d9f;
+        animation: blink 1.0s steps(8, start) infinite;
+    }
+    
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid rgb(24, 88, 117);
+        border-radius: 5px;
+        font-size: 1rem;
+        text-align: center;
+        background-color: rgb(153, 192, 211);
+    }
+    
+    input:focus {
+        border-color: rgba(29, 129, 187, 0.808);
+        color:#113d47;
+        outline: none;
+        transition: calc(1.5);
+    }
+    
+    button {
+        width: 40%;
+        height: 15%;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 5px;
+        background-color: rgb(57, 121, 151);
+        color: rgb(160, 221, 236);
+        transition: 0.3s;
+    }
+    
+    button:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+    
+    button:active{
+        background-color: rgb(188, 209, 219);
+        color: rgb(24, 88, 117);
+    }
+    
+    #resultado, #resultado::placeholder {
+        color:rgb(62, 105, 13);
+        font-weight: bold;
+    }
+   </style>
+<div class="container">
+    <h1>Classificação de Nadadores 🥽</h1>
+    <p>Veja sua classificação para o novo campeonato de natação!</p>
+    <br>
+    <label for="nome">Nome</label>
+    <br>
+    <input type="text" id="nome" required>
+    <br><br>
+    <label for="dataNascimento">Data de Nascimento</label>
+    <br>
+    <input type="date" id="dataNascimento" required>
+    <br><br>
+    <button id="verificar">Enviar</button>
+    <p id="resultado"></p>
+</div>
+
+<script>
+    const verificar = document.getElementById('verificar');
+    const resultado = document.getElementById('resultado');
+    const dataNascimento = document.getElementById('dataNascimento');
+    
+
+    verificar.addEventListener('click', function() {
+        const nascimento = new Date(dataNascimento.value);
+        const hoje = new Date();
+        var idade = Math.floor((hoje - nascimento) / (1000 * 60 * 60 * 24 * 365.25));
+        const nome = document.getElementById('nome').value
+
+        if (!dataNascimento.value || !nome) {
+            alert("Por favor, confirme suas informações.");
+            return;
+        }
+
+        //Abaixo de 4 anos -> Acesso Negado
+        if(idade <= 4){
+            alert("Você não tem idade o suficiente para participar. Acesso negado.");
+        }
+
+        //De 5 até 7 anos -> Infantil A
+        if(idade >=5 && idade <8){
+            alert(nome + ", Você tem " + idade + " anos e faz parte da categoria 'Infantil A'.");
+        }
+
+        //De 8 até 11 anos -> Infantil B
+        if(idade >= 8 && idade <12){
+            alert(nome + ", Você tem " + idade + " anos e faz parte da categoria 'Infantil B'.");
+        }
+
+        //12 e 13 anos -> Juvenil A
+        if(idade >= 12 && idade <14){
+            alert(nome + ", Você tem " + idade + " anos e faz parte da categoria 'Juvenil A'.");
+        }
+
+        //De 14 até 17 anos -> Juvenil B
+        if(idade >=14 && idade <18){
+            alert(nome + ", Você tem " + idade + " anos e faz parte da categoria 'Juvenil B'.");
+        }
+
+        //Maior ou igual a 18 -> Adulto
+        if(idade >=18){
+            alert(nome + ", Você tem " + idade + " anos e faz parte da categoria 'Adulto'.");
+        } 
+    });
+
+</script>
+</body>
+</html>
